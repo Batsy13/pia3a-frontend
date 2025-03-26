@@ -1,17 +1,11 @@
+import { ListItemProps } from "@/types/lists";
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
-type Props = {
-  name: string;
-  placesCount: number;
-  type?: string;
-};
-
-export default function ListItem({ name, placesCount, type }: Props) {
+export default function ListItem({ name, placesCount, type }: ListItemProps) {
   return (
     <View>
       <View style={styles.listItem}>
-        {/* Simulando a imagem com uma View */}
         <View style={styles.placeholderIcon} />
 
         <View style={styles.textContainer}>
@@ -36,10 +30,10 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
   placeholderIcon: {
-    width: 30, // Tamanho da "imagem"
+    width: 30,
     height: 30,
     borderRadius: 6,
-    backgroundColor: "#555", // Cor de fundo para simular a imagem
+    backgroundColor: "#555",
     marginRight: 10,
   },
   textContainer: {

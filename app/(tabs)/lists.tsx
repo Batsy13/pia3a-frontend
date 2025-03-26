@@ -1,20 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { View, FlatList, StyleSheet } from "react-native";
 import axios from "axios";
-import ListHeader from "../../components/list-header";
-import ListItem from "../../components/list-item";
-import ShowMoreButton from "../../components/show-more-button";
+import ListHeader from "../../components/lists/list-header";
+import ListItem from "../../components/lists/list-item";
+import ShowMoreButton from "../../components/lists/show-more-button";
+import { List } from "@/types/lists";
 
-type List = {
-  id: number;
-  name: string;
-  places: { id: number; name: string }[];
-  type?: string;
-};
+
 
 export default function Lists() {
   const [lists, setLists] = useState<List[]>([]);
   const [showAll, setShowAll] = useState(false);
+
+  // const { data, isLoading } = useQuery({queryFn: getLists, queryKey: ["lists"]})
 
   useEffect(() => {
     fetchLists();
@@ -30,26 +28,18 @@ export default function Lists() {
 
       console.log("Dados recebidos da API:", response.data);
 
-      if (response.data?.lists) {
-        setLists(response.data.lists);
-      } else {
-        console.error("A API não retornou a estrutura esperada:", response.data);
-      }
+      setLists(response.data.lists);
     } catch (error: any) {
       console.error(
-        "Erro ao buscar listas salvas:",
-        error.response?.status || "Sem status",
-        error.response?.data || error.message
+        "Erro ao buscar listas salvas."
       );
     }
   };
 
   return (
     <View style={styles.container}>
-      {/* Cabeçalho */}
-      <ListHeader onNewListPress={() => console.log("Criar nova lista")} />
 
-      {/* Listas */}
+      <ListHeader />
       <FlatList
         data={showAll ? lists : lists.slice(0, 4)}
         keyExtractor={(item) => item.id.toString()}
@@ -57,9 +47,8 @@ export default function Lists() {
           <ListItem name={item.name} placesCount={item.places.length} type={item.type} />
         )}
       />
+      {lists.length > 4 && <ShowMoreButton onPress={() => setShowAll(!showAll)} showAll={showAll} />}
 
-      {/* Botão "Mais" */}
-      {lists.length > 1 && <ShowMoreButton onPress={() => setShowAll(!showAll)} showAll={showAll} />}
     </View>
   );
 }

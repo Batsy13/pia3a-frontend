@@ -1,15 +1,11 @@
 import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 
-type Props = {
-  onNewListPress: () => void;
-};
-
-export default function ListHeader({ onNewListPress }: Props) {
+export default function ListHeader() {
   return (
     <View>
       <Text style={styles.title}>Salvos</Text>
-      <TouchableOpacity style={styles.newListButton} onPress={onNewListPress}>
+      <TouchableOpacity style={styles.newListButton} onPress={() => console.log("apertou")}>
         <Text style={styles.newListText}>+ Nova Lista</Text>
       </TouchableOpacity>
       <Text style={styles.subTitle}>Suas listas</Text>
