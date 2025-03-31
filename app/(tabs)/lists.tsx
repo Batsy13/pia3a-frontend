@@ -1,54 +1,30 @@
-import React, { useEffect, useState } from "react";
-import { View, FlatList, StyleSheet } from "react-native";
-import axios from "axios";
+import React from "react";
+import { View, StyleSheet } from "react-native";
+import { getLists } from "@/api/lists";
+import { useQuery } from "@tanstack/react-query";
+import { Loading } from "@/components/ui/loading";
+import { ListConteiner } from "@/components/lists/listConteiner";
 import ListHeader from "../../components/lists/list-header";
-import ListItem from "../../components/lists/list-item";
-import ShowMoreButton from "../../components/lists/show-more-button";
 import { List } from "@/types/lists";
 
-
-
 export default function Lists() {
-  const [lists, setLists] = useState<List[]>([]);
-  const [showAll, setShowAll] = useState(false);
+  const { data, isLoading } = useQuery<List[]>({
+    queryFn: getLists,
+    queryKey: ["lists"],
+  });
 
-  // const { data, isLoading } = useQuery({queryFn: getLists, queryKey: ["lists"]})
-
-  useEffect(() => {
-    fetchLists();
-  }, []);
-
-  const fetchLists = async () => {
-    try {
-      const response = await axios.get("https://mock.apidog.com/m1/844414-824492-default/api/places", {
-        headers: {
-          Accept: "application/json",
-        },
-      });
-
-      console.log("Dados recebidos da API:", response.data);
-
-      setLists(response.data.lists);
-    } catch (error: any) {
-      console.error(
-        "Erro ao buscar listas salvas."
-      );
-    }
-  };
+  if (isLoading) {
+    return (
+      <View style={styles.container}>
+        <Loading />
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
-
       <ListHeader />
-      <FlatList
-        data={showAll ? lists : lists.slice(0, 4)}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }) => (
-          <ListItem name={item.name} placesCount={item.places.length} type={item.type} />
-        )}
-      />
-      {lists.length > 4 && <ShowMoreButton onPress={() => setShowAll(!showAll)} showAll={showAll} />}
-
+      <ListConteiner data={data} />
     </View>
   );
 }
@@ -57,6 +33,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#121212",
-    padding: 16,
+    paddingHorizontal: 28,
+    paddingTop: 20,
   },
 });

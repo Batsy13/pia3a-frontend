@@ -7,7 +7,6 @@ export const getLists = async () => {
                 Accept: "application/json",
             },
         });
-        console.log("Dados recebidos da API:", response.data.lists);
         return(response.data.lists)
     } catch (error: any) {
         console.error("Erro ao buscar listas salvas");

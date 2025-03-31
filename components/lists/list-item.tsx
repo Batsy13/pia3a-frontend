@@ -2,7 +2,7 @@ import { ListItemProps } from "@/types/lists";
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
-export default function ListItem({ name, placesCount, type }: ListItemProps) {
+export default function ListItem({ name, placesCount, type, isLast }: ListItemProps) {
   return (
     <View>
       <View style={styles.listItem}>
@@ -16,7 +16,7 @@ export default function ListItem({ name, placesCount, type }: ListItemProps) {
         </View>
         <Text style={styles.options}>⋮</Text>
       </View>
-      <View style={styles.separator} />
+      {!isLast && <View style={styles.separator} />}
     </View>
   );
 }
@@ -27,6 +27,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#1e1e1e",
     padding: 12,
+    marginVertical: 30,
     borderRadius: 8,
   },
   placeholderIcon: {

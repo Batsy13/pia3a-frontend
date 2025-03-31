@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 
 export default function ListHeader() {
   return (
-    <View>
+    <View style={styles.container}>
       <Text style={styles.title}>Salvos</Text>
       <TouchableOpacity style={styles.newListButton} onPress={() => console.log("apertou")}>
         <Text style={styles.newListText}>+ Nova Lista</Text>
@@ -14,6 +14,11 @@ export default function ListHeader() {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    display: "flex",
+    flexDirection: "column",
+    gap: 20,
+  },
   title: {
     color: "white",
     fontSize: 22,
