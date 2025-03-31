@@ -2,28 +2,30 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { Link } from 'expo-router';
 import React from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 export default function Home() {
+
   return (
-    <LinearGradient
-      colors={['#BE1636', '#2B1838']}
-      start={{ x: 0, y: 0 }}
-      end={{ x: 1, y: 0 }}
-      style={styles.container}>
-      <Text style={styles.title}>Bem-vindo!</Text>
-      <View style={styles.buttonContainer}>
-        <Link href="/login" asChild>
-          <TouchableOpacity style={styles.buttonTransparent}>
-            <Text style={styles.buttonTextTransparent}>Login</Text>
-          </TouchableOpacity>
-        </Link>
-        <Link href="/register" asChild>
-          <TouchableOpacity style={styles.buttonWhite}>
-            <Text style={styles.buttonTextWhite}>Registro</Text>
-          </TouchableOpacity>
-        </Link>
-      </View>
-    </LinearGradient>
+      <LinearGradient
+        colors={['#BE1636', '#2B1838']}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 0 }}
+        style={styles.container}>
+        <Text style={styles.title}>Bem-vindo!</Text>
+        <View style={styles.buttonContainer}>
+          <Link href="/login" asChild>
+            <TouchableOpacity style={styles.buttonTransparent}>
+              <Text style={styles.buttonTextTransparent}>Login</Text>
+            </TouchableOpacity>
+          </Link>
+          <Link href="/register" asChild>
+            <TouchableOpacity style={styles.buttonWhite}>
+              <Text style={styles.buttonTextWhite}>Registro</Text>
+            </TouchableOpacity>
+          </Link>
+        </View>
+      </LinearGradient>
   );
 }
 
