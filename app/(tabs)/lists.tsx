@@ -1,11 +1,12 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import { View } from "react-native";
 import { getLists } from "@/api/lists";
 import { useQuery } from "@tanstack/react-query";
 import { Loading } from "@/components/ui/loading";
 import { ListConteiner } from "@/components/lists/listConteiner";
 import ListHeader from "../../components/lists/list-header";
 import { List } from "@/types/lists";
+import styles from '../styles/lists/listsStyle';
 
 export default function Lists() {
   const { data, isLoading } = useQuery<List[]>({
@@ -28,12 +29,3 @@ export default function Lists() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#121212",
-    paddingHorizontal: 28,
-    paddingTop: 20,
-  },
-});

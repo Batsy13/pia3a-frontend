@@ -46,6 +46,7 @@ export default StyleSheet.create({
       backgroundColor: "white",
       height: "70%",
       display: 'flex',
+      gap: 20,
       flexDirection: 'column',
       justifyContent: "space-between",
       paddingHorizontal: 32,
@@ -80,8 +81,12 @@ export default StyleSheet.create({
     buttonText: {
       color: "white",
       fontSize: 24,
-      fontWeight: "600",
+      fontWeight: "900",
       fontFamily: "Raleway",
+      textAlign: "center",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
     },
     linkButton: {
       alignItems: "flex-end",

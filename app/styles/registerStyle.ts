@@ -27,7 +27,7 @@ export default StyleSheet.create({
       fontFamily: "Raleway",
     },
     titleDiv: {
-      height: '30%',
+      height: '20%',
       display: "flex",
       width: '100%',
       padding: 32,
@@ -44,20 +44,15 @@ export default StyleSheet.create({
     form: {
       width: "100%",
       backgroundColor: "white",
-      height: "70%",
+      height: "80%",
       display: 'flex',
+      gap: 20,
       flexDirection: 'column',
       justifyContent: "space-between",
       paddingHorizontal: 32,
       borderTopEndRadius: 40,
       borderTopStartRadius: 40,
       paddingVertical: 46,
-    },
-    inputLabel: {
-      color: "#BE1636",
-      fontWeight: "600",
-      fontSize: 24,
-      fontFamily: "Raleway",
     },
     input: {
       width: "100%",
@@ -77,13 +72,8 @@ export default StyleSheet.create({
       justifyContent: "center",
       alignItems: "center",
     },
-    buttonText: {
-      color: "white",
-      fontSize: 24,
-      fontWeight: "600",
-      fontFamily: "Raleway",
-    },
     linkButton: {
+      fontWeight: 900,
       alignItems: "flex-end",
       fontFamily: "Raleway",
       gap: 4,

@@ -63,19 +63,20 @@ const styles = StyleSheet.create({
     width: '100%',
     borderRadius: 100,
     alignItems: 'center',
+    justifyContent: 'center',
     borderWidth: 2,
     borderColor: 'white',
   },
   buttonTextWhite: {
     color: '#BE1636',
     fontSize: 24,
-    fontWeight: '600',
+    fontWeight: '800',
     fontFamily: 'Raleway',
   },
   buttonTextTransparent: {
     color: 'white',
     fontSize: 24,
-    fontWeight: '600',
+    fontWeight: '800',
     fontFamily: 'Raleway',
   },
 });

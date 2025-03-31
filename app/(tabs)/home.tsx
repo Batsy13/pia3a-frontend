@@ -1,22 +1,22 @@
 import React from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { View } from "react-native";
+import MapComponent from "../../components/home/Map";
+import { LogOut } from "lucide-react-native";
+import { useNavigation } from "@react-navigation/native";
+import styles from "../styles/homeStyle";
 
 export default function HomeScreen() {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Página inicial</Text>
+      <MapComponent
+        onInitialized={function (zoomToGeoJSONFunc: () => void): void {}}
+        onMapPress={function (coordinates: [number, number]): void {}}
+      />
+      <View style={styles.homeButton} onTouchEnd={() => navigation.navigate("index")}>
+        <LogOut size={20} color={"white"} />
+      </View>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    padding: 20,
-  },
-  text: {
-    color: "red",
-  }
-});

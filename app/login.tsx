@@ -26,14 +26,14 @@ export default function Login() {
       end={{ x: 1, y: 0 }}
       style={styles.container}>
       <View style={styles.titleDiv}>
-        <Text style={styles.title}>Olá <br />Entre!</Text>
+        <Text style={styles.title}>Olá {"\n"}Entre!</Text>
       </View>
       <View style={styles.form}>
         <View style={{ display: 'flex', flexDirection: 'column', gap: 80 }}>
           <View style={styles.inputDiv}>
-            <label style={{ color: "#BE1636", fontWeight: 600, fontSize: 24 }}>
+            <Text style={{ color: "#BE1636", fontWeight: 600, fontSize: 24 }}>
               E-mail
-            </label>
+            </Text>
             <TextInput
               style={[styles.input, errors.email ? styles.inputError : null]}
               placeholderTextColor={"#8D8C9A"}
@@ -51,9 +51,9 @@ export default function Login() {
             {errors.email ? <Text style={styles.errorText}>{errors.email}</Text> : null}
           </View>
           <View style={styles.inputDiv}>
-            <label style={{ color: "#BE1636", fontWeight: 600, fontSize: 24 }}>
+            <Text style={{ color: "#BE1636", fontWeight: 600, fontSize: 24 }}>
               Senha
-            </label>
+            </Text>
             <View style={styles.inputContainer}>
               <TextInput
                 style={[styles.input, errors.password ? styles.inputError : null]}
@@ -98,7 +98,7 @@ export default function Login() {
             <Text style={{ fontFamily: 'Raleway' }}>Não tem uma conta?
             </Text>
             <Link href="/register" asChild>
-              <Text style={{ color: '#BE1636', fontFamily: 'Raleway' }}>
+              <Text style={{ color: '#BE1636', fontFamily: 'Raleway', fontWeight: 800}}>
                 Registre-se
               </Text>
             </Link>
