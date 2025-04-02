@@ -1,4 +1,5 @@
 import { ListItemProps } from "@/types/lists";
+import { useRouter } from "expo-router";
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
@@ -8,9 +9,12 @@ export default function ListItem({
   type,
   isLast,
 }: ListItemProps) {
+
+  const router = useRouter();
+
   return (
     <View>
-      <View style={styles.listItem}>
+      <View style={styles.listItem} onTouchEnd={() => router.push("/list")}>
         <View style={styles.placeholderIcon} />
 
         <View style={styles.textContainer}>

@@ -25,7 +25,7 @@ export default function CreateListForm() {
             cursorColor="#BE1636"
           />
           <TextInput
-            placeholder="Adicione uma descrição a sua lita"
+            placeholder="Adicione uma descrição à lista"
             style={styles.inputStyle}
             placeholderTextColor={"#9A9A9A"}
             selectionColor="transparent"

@@ -1,7 +1,7 @@
 import React from "react";
 import { View } from "react-native";
 import styles from "@/styles/create-list/create-list"
-import CreateListHeader from "@/components/create-list/creat-list-header";
+import CreateListHeader from "@/components/create-list/create-list-header";
 import CreateListFooter from "@/components/create-list/create-list-footer";
 import CreateListForm from "@/components/create-list/create-list-form";
 
