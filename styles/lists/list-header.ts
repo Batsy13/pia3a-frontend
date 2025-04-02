@@ -9,7 +9,7 @@ export default StyleSheet.create({
     },
     title: {
       color: "white",
-      fontSize: 22,
+      fontSize: 24,
       fontWeight: "bold",
       marginBottom: 16,
       textAlign: "center",

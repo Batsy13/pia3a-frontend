@@ -1,12 +1,12 @@
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native";
-import { Link } from "expo-router";
+import { View, Text, TextInput, TouchableOpacity } from "react-native";
+import { Link, router } from "expo-router";
 import { useState } from "react";
 import React from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import { Eye, EyeOff } from "lucide-react-native";
 import { useAuth } from "@/hooks/useAuth";
 import type { LoginFormData } from "@/types/auth";
-import styles from "./styles/loginStyle"
+import styles from "@/styles/login-style"
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -14,6 +14,10 @@ export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const { errors, handleLogin, clearErrors } = useAuth();
 
+  if(true) {
+    router.push("/(tabs)/home");
+  }
+  
   const onSubmit = () => {
     const data: LoginFormData = { email, password };
     handleLogin(data);

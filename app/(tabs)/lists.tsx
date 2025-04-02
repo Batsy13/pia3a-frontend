@@ -6,7 +6,7 @@ import { Loading } from "@/components/ui/loading";
 import { ListConteiner } from "@/components/lists/listConteiner";
 import ListHeader from "../../components/lists/list-header";
 import { List } from "@/types/lists";
-import styles from '../styles/lists/listsStyle';
+import styles from '@/styles/lists/list-style';
 
 export default function Lists() {
   const { data, isLoading } = useQuery<List[]>({

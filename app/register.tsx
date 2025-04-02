@@ -12,7 +12,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { Eye, EyeOff } from "lucide-react-native";
 import { useAuth } from "@/hooks/useAuth";
 import type { RegisterFormData } from "@/types/auth";
-import styles from "./styles/registerStyle";
+import styles from "@/styles/register-style";
 
 export default function RegisterScreen() {
   const [name, setName] = useState("");

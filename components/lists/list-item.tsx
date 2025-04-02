@@ -2,7 +2,12 @@ import { ListItemProps } from "@/types/lists";
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
-export default function ListItem({ name, placesCount, type, isLast }: ListItemProps) {
+export default function ListItem({
+  name,
+  placesCount,
+  type,
+  isLast,
+}: ListItemProps) {
   return (
     <View>
       <View style={styles.listItem}>
@@ -11,7 +16,8 @@ export default function ListItem({ name, placesCount, type, isLast }: ListItemPr
         <View style={styles.textContainer}>
           <Text style={styles.listItemTitle}>{name}</Text>
           <Text style={styles.listItemSubtitle}>
-            Particular · {placesCount} {type === "viagem" ? "viagem" : "lugares"}
+            Particular · {placesCount}{" "}
+            {type === "viagem" ? "viagem" : "lugares"}
           </Text>
         </View>
         <Text style={styles.options}>⋮</Text>

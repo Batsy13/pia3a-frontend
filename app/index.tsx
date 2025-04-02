@@ -2,7 +2,6 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { Link } from 'expo-router';
 import React from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 export default function Home() {
 
