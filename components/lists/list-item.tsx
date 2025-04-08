@@ -2,29 +2,36 @@ import { ListItemProps } from "@/types/lists";
 import { useRouter } from "expo-router";
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
+import * as LucideIcons from "lucide-react-native";
+import { EllipsisVertical } from "lucide-react-native";
 
 export default function ListItem({
+  id,
   name,
   placesCount,
-  type,
   isLast,
+  icon, 
 }: ListItemProps) {
-
   const router = useRouter();
+  const IconComponent = (LucideIcons[icon] as React.ComponentType<{ color: string; size: number }>) || LucideIcons.HelpCircle;
 
   return (
     <View>
-      <View style={styles.listItem} onTouchEnd={() => router.push("/list")}>
-        <View style={styles.placeholderIcon} />
+      <View
+        style={styles.listItem}
+        onTouchEnd={() => router.push(`/list?listId=${id}`)}
+      >
+        <View style={styles.iconContainer}>
+          <IconComponent color="white" size={24} />
+        </View>
 
         <View style={styles.textContainer}>
           <Text style={styles.listItemTitle}>{name}</Text>
           <Text style={styles.listItemSubtitle}>
-            Particular · {placesCount}{" "}
-            {type === "viagem" ? "viagem" : "lugares"}
+            {placesCount > 1 ? `${placesCount} lugares` : `${placesCount} lugar`}
           </Text>
         </View>
-        <Text style={styles.options}>⋮</Text>
+        <Text style={styles.options}><EllipsisVertical /></Text>
       </View>
       {!isLast && <View style={styles.separator} />}
     </View>
@@ -40,11 +47,11 @@ const styles = StyleSheet.create({
     marginVertical: 30,
     borderRadius: 8,
   },
-  placeholderIcon: {
+  iconContainer: {
     width: 30,
     height: 30,
-    borderRadius: 6,
-    backgroundColor: "#555",
+    justifyContent: "center",
+    alignItems: "center",
     marginRight: 10,
   },
   textContainer: {

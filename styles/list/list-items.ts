@@ -14,18 +14,21 @@ export default StyleSheet.create({
     },
 
     listTitle: {
-        gap: 5,
+        gap: 10,
         display: "flex",
-        alignContent: "center",
+        alignItems: "center",
         flexDirection: "row",
     },
 
     listButton: {
         flexDirection: "row",
-        width: "auto",
+        display: "flex",
+        alignItems: "center",
         gap: 5,
-        padding: 10,
+        paddingVertical: 10,
+        paddingHorizontal: 30,
         borderRadius: 20,
         backgroundColor: "#FFF",
+        alignSelf: "flex-start",
     }
 })

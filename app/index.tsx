@@ -13,7 +13,7 @@ export default function Home() {
         style={styles.container}>
         <Text style={styles.title}>Bem-vindo!</Text>
         <View style={styles.buttonContainer}>
-          <Link href="/login" asChild>
+          <Link href="/home" asChild> {/* Lembrar de trocar para /login*/}
             <TouchableOpacity style={styles.buttonTransparent}>
               <Text style={styles.buttonTextTransparent}>Login</Text>
             </TouchableOpacity>

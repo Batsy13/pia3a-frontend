@@ -9,7 +9,7 @@ import { List } from "@/types/lists";
 import styles from '@/styles/lists/list-style';
 
 export default function Lists() {
-  const { data, isLoading } = useQuery<List[]>({
+  const { data, isLoading } = useQuery<List[] | undefined>({
     queryFn: getLists,
     queryKey: ["lists"],
   });

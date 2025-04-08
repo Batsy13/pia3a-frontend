@@ -3,6 +3,7 @@ import ListItem from "./list-item";
 import React, { useState } from "react";
 import ShowMoreButton from "./show-more-button";
 import { List } from "@/types/lists";
+import * as LucideIcons from "lucide-react-native";
 
 interface ListConteinerProps {
   data: List[] | undefined;
@@ -19,10 +20,11 @@ export const ListConteiner = (data: ListConteinerProps) => {
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item, index }) => (
           <ListItem
+            id={item.id}
             name={item.name}
             placesCount={item.places.length}
-            type={item.type}
             isLast={index === lists.length - 1}
+            icon={item.icon as keyof typeof LucideIcons}
           />
         )}
       />

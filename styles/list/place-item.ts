@@ -10,7 +10,6 @@ export default StyleSheet.create({
     },
 
     images: {
-        width: "100%",
         overflowX: "scroll",
         display: "flex",
         flexDirection: "row",
