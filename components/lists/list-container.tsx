@@ -5,11 +5,11 @@ import ShowMoreButton from "./show-more-button";
 import { List } from "@/types/lists";
 import * as LucideIcons from "lucide-react-native";
 
-interface ListConteinerProps {
+interface ListContainerProps {
   data: List[] | undefined;
 }
 
-export const ListConteiner = (data: ListConteinerProps) => {
+export const ListContainer = (data: ListContainerProps) => {
   const [showAll, setShowAll] = useState(false);
   const lists = data?.data || [];
 

@@ -1,30 +1,38 @@
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import { Link } from 'expo-router';
+import { useRouter } from 'expo-router';
 import React from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
 
 export default function Home() {
 
+  const router = useRouter();
+
   return (
-      <LinearGradient
-        colors={['#BE1636', '#2B1838']}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 0 }}
-        style={styles.container}>
-        <Text style={styles.title}>Bem-vindo!</Text>
-        <View style={styles.buttonContainer}>
-          <Link href="/home" asChild> {/* Lembrar de trocar para /login*/}
-            <TouchableOpacity style={styles.buttonTransparent}>
-              <Text style={styles.buttonTextTransparent}>Login</Text>
-            </TouchableOpacity>
-          </Link>
-          <Link href="/register" asChild>
+    <LinearGradient
+      colors={['#BE1636', '#2B1838']}
+      start={{ x: 0, y: 0 }}
+      end={{ x: 1, y: 0 }}
+      style={styles.container}
+    >
+      <Text style={styles.title}>Bem-vindo!</Text>
+      <View style={styles.buttonContainer}>
+        <>
+          <TouchableOpacity
+            onPress={() => router.navigate("/(tabs)/home")} /* Lembrar de trocar para /login */
+            style={styles.buttonTransparent}
+          >
+            <Text style={styles.buttonTextTransparent}>Login</Text>
+          </TouchableOpacity>
+        </>
+        <>
+          <TouchableOpacity onPress={() => router.navigate("/register")}>
             <TouchableOpacity style={styles.buttonWhite}>
               <Text style={styles.buttonTextWhite}>Registro</Text>
             </TouchableOpacity>
-          </Link>
-        </View>
-      </LinearGradient>
+          </TouchableOpacity>
+        </>
+      </View>
+    </LinearGradient>
   );
 }
 

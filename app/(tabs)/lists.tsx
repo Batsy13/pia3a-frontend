@@ -3,7 +3,7 @@ import { View } from "react-native";
 import { getLists } from "@/api/lists";
 import { useQuery } from "@tanstack/react-query";
 import { Loading } from "@/components/ui/loading";
-import { ListConteiner } from "@/components/lists/listConteiner";
+import { ListContainer } from "@/components/lists/list-container";
 import ListHeader from "../../components/lists/list-header";
 import { List } from "@/types/lists";
 import styles from '@/styles/lists/list-style';
@@ -25,7 +25,7 @@ export default function Lists() {
   return (
     <View style={styles.container}>
       <ListHeader />
-      <ListConteiner data={data} />
+      <ListContainer data={data} />
     </View>
   );
 }
