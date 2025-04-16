@@ -18,17 +18,15 @@ export default function Home() {
       <View style={styles.buttonContainer}>
         <>
           <TouchableOpacity
-            onPress={() => router.navigate("/(tabs)/home")} /* Lembrar de trocar para /login */
+            onPress={() => router.navigate("/login")} 
             style={styles.buttonTransparent}
           >
             <Text style={styles.buttonTextTransparent}>Login</Text>
           </TouchableOpacity>
         </>
         <>
-          <TouchableOpacity onPress={() => router.navigate("/register")}>
-            <TouchableOpacity style={styles.buttonWhite}>
+          <TouchableOpacity style={styles.buttonWhite} onPress={() => router.navigate("/register")}>
               <Text style={styles.buttonTextWhite}>Registro</Text>
-            </TouchableOpacity>
           </TouchableOpacity>
         </>
       </View>

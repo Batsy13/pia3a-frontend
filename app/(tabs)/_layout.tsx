@@ -52,13 +52,13 @@ export default function TabLayout() {
           tabBarIcon: ({ color, size }) => <Bookmark color={color} size={size} />,
         }}
       />
-      <Tabs.Screen
+      {/* <Tabs.Screen
         name="community"
         options={{
           title: 'Comunidade',
           tabBarIcon: ({ color, size }) => <MessageCircle color={color} size={size} />,
         }}
-      />
+      /> */}
     </Tabs>
   );
 }

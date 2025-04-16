@@ -1,7 +1,7 @@
 import { ListItemProps } from "@/types/lists";
 import { useRouter } from "expo-router";
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import * as LucideIcons from "lucide-react-native";
 import { EllipsisVertical } from "lucide-react-native";
 
@@ -17,9 +17,9 @@ export default function ListItem({
 
   return (
     <View>
-      <View
+      <TouchableOpacity
         style={styles.listItem}
-        onTouchEnd={() => router.push(`/list?listId=${id}`)}
+        onPress={() => router.push(`/list?listId=${id}`)}
       >
         <View style={styles.iconContainer}>
           <IconComponent color="white" size={24} />
@@ -32,7 +32,7 @@ export default function ListItem({
           </Text>
         </View>
         <Text style={styles.options}><EllipsisVertical /></Text>
-      </View>
+      </TouchableOpacity>
       {!isLast && <View style={styles.separator} />}
     </View>
   );
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#1e1e1e",
     padding: 12,
-    marginVertical: 30,
+    marginVertical: 10,
     borderRadius: 8,
   },
   iconContainer: {

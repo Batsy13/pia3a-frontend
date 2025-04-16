@@ -46,6 +46,7 @@ export default StyleSheet.create({
         borderColor: "#9A9A9A",
         borderWidth: 1,
         color: "#fff",
+        zIndex: 10,
     }
 
 });

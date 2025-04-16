@@ -1,10 +1,10 @@
 import React from "react";
-import { View, TouchableOpacity, Text } from "react-native";
-import styles from "@/styles/create-list/create-list-footer";
+import { View, TouchableOpacity } from "react-native";
+import styles from "@/styles/create-place/create-place-footer";
 import { PlusIcon } from "lucide-react-native";
 
-export default function CreateListFooter({ formData, onSubmit }: any) {
-  const isFormValid = formData.icon && formData.listName && formData.description;
+export default function CreatePlaceFooter({ formData, onSubmit }: any) {
+  const isFormValid = formData.images && formData.listName && formData.description;
 
   return (
     <View style={styles.container}>

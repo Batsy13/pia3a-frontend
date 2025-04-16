@@ -1,4 +1,4 @@
-import { FlatList } from "react-native";
+import { FlatList, View } from "react-native";
 import ListItem from "./list-item";
 import React, { useState } from "react";
 import ShowMoreButton from "./show-more-button";
@@ -14,8 +14,9 @@ export const ListContainer = (data: ListContainerProps) => {
   const lists = data?.data || [];
 
   return (
-    <>
+    <View style={{ display: "flex", gap: 10, flex: 1}}>
       <FlatList
+        showsVerticalScrollIndicator={false}
         data={showAll ? lists : lists.slice(0, 4)}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item, index }) => (
@@ -34,6 +35,6 @@ export const ListContainer = (data: ListContainerProps) => {
           showAll={showAll}
         />
       )}
-    </>
+    </View>
   );
 };

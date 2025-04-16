@@ -13,11 +13,6 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const { errors, handleLogin, clearErrors } = useAuth();
-
-  if(true) {
-    router.push("/(tabs)/home");
-  }
-  
   
   const onSubmit = () => {
     const data: LoginFormData = { email, password };
