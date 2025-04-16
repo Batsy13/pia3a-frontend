@@ -2,9 +2,9 @@ import { Tabs } from 'expo-router';
 import React from 'react';
 import { Platform } from 'react-native';
 
-import { HapticTab } from '@/components/HapticTab';
-import { IconSymbol } from '@/components/ui/IconSymbol';
-import TabBarBackground from '@/components/ui/TabBarBackground';
+import { HapticTab } from '@/components/haptic-tab';
+import { IconSymbol } from '@/components/ui/icon-symbol';
+import TabBarBackground from '@/components/ui/tab-bar-background';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { Bookmark, MapPin, MessageCircle } from 'lucide-react-native';
@@ -52,13 +52,13 @@ export default function TabLayout() {
           tabBarIcon: ({ color, size }) => <Bookmark color={color} size={size} />,
         }}
       />
-      <Tabs.Screen
+      {/* <Tabs.Screen
         name="community"
         options={{
           title: 'Comunidade',
           tabBarIcon: ({ color, size }) => <MessageCircle color={color} size={size} />,
         }}
-      />
+      /> */}
     </Tabs>
   );
 }

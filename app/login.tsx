@@ -1,19 +1,19 @@
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native";
-import { Link } from "expo-router";
+import { View, Text, TextInput, TouchableOpacity } from "react-native";
+import { Link, router } from "expo-router";
 import { useState } from "react";
 import React from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import { Eye, EyeOff } from "lucide-react-native";
 import { useAuth } from "@/hooks/useAuth";
 import type { LoginFormData } from "@/types/auth";
-import styles from "./styles/loginStyle"
+import styles from "@/styles/login-style"
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const { errors, handleLogin, clearErrors } = useAuth();
-
+  
   const onSubmit = () => {
     const data: LoginFormData = { email, password };
     handleLogin(data);
@@ -26,14 +26,14 @@ export default function Login() {
       end={{ x: 1, y: 0 }}
       style={styles.container}>
       <View style={styles.titleDiv}>
-        <Text style={styles.title}>Olá <br />Entre!</Text>
+        <Text style={styles.title}>Olá {"\n"}Entre!</Text>
       </View>
       <View style={styles.form}>
         <View style={{ display: 'flex', flexDirection: 'column', gap: 80 }}>
           <View style={styles.inputDiv}>
-            <label style={{ color: "#BE1636", fontWeight: 600, fontSize: 24 }}>
+            <Text style={{ color: "#BE1636", fontWeight: 600, fontSize: 24 }}>
               E-mail
-            </label>
+            </Text>
             <TextInput
               style={[styles.input, errors.email ? styles.inputError : null]}
               placeholderTextColor={"#8D8C9A"}
@@ -51,9 +51,9 @@ export default function Login() {
             {errors.email ? <Text style={styles.errorText}>{errors.email}</Text> : null}
           </View>
           <View style={styles.inputDiv}>
-            <label style={{ color: "#BE1636", fontWeight: 600, fontSize: 24 }}>
+            <Text style={{ color: "#BE1636", fontWeight: 600, fontSize: 24 }}>
               Senha
-            </label>
+            </Text>
             <View style={styles.inputContainer}>
               <TextInput
                 style={[styles.input, errors.password ? styles.inputError : null]}
@@ -98,7 +98,7 @@ export default function Login() {
             <Text style={{ fontFamily: 'Raleway' }}>Não tem uma conta?
             </Text>
             <Link href="/register" asChild>
-              <Text style={{ color: '#BE1636', fontFamily: 'Raleway' }}>
+              <Text style={{ color: '#BE1636', fontFamily: 'Raleway', fontWeight: 800}}>
                 Registre-se
               </Text>
             </Link>
