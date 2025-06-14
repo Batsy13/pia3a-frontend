@@ -44,6 +44,7 @@ export const register = async (
 
 export const logout = async (): Promise<void> => {
   try {
+    console.log("Fazendo logout...");
     await AsyncStorage.removeItem("userToken");
   } catch (error) {
     console.error("Erro ao fazer logout:", error);

@@ -1,5 +1,5 @@
 import { useAssets } from 'expo-asset';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useImperativeHandle } from 'react';
 import { useWindowDimensions } from 'react-native';
 import WebView, { WebViewMessageEvent } from 'react-native-webview';
 
@@ -8,7 +8,11 @@ type MapProps = {
     onMapPress: (coordinates: [number, number]) => void;
 };
 
-const Map = (props: MapProps) => {
+export type MapRef = {
+    zoomToGeoJSON: () => void;
+};
+
+const Map = React.forwardRef<MapRef, MapProps>((props, ref) => {
     const { onInitialized, onMapPress } = props;
 
     const [assets] = useAssets([require('../../assets/map.html')]);
@@ -16,11 +20,15 @@ const Map = (props: MapProps) => {
 
     const dimensions = useWindowDimensions();
 
-    const webViewRef = useRef<WebView | null>();
+    const webViewInternalRef = useRef<WebView | null>(null);
 
     const zoomToGeoJSON = () => {
-        webViewRef.current?.injectJavaScript('window.zoomToGeoJSON(); true');
+        webViewInternalRef.current?.injectJavaScript('window.zoomToGeoJSON(); true');
     };
+
+    useImperativeHandle(ref, () => ({
+        zoomToGeoJSON: zoomToGeoJSON,
+    }));
 
     useEffect(() => {
         if (assets) {
@@ -31,7 +39,7 @@ const Map = (props: MapProps) => {
                     onInitialized(zoomToGeoJSON);
                 });
         }
-    }, [assets]);
+    }, [assets, onInitialized]);
 
     const messageHandler = (e: WebViewMessageEvent) => {
         const coords = JSON.parse(e.nativeEvent.data) as [number, number];
@@ -44,7 +52,7 @@ const Map = (props: MapProps) => {
 
     return (
         <WebView
-            ref={(r) => (webViewRef.current = r)}
+            ref={webViewInternalRef}
             injectedJavaScript=''
             source={{
                 html: htmlString,
@@ -63,6 +71,6 @@ const Map = (props: MapProps) => {
             onMessage={messageHandler}
         />
     );
-};
+});
 
 export default Map;

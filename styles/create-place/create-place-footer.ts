@@ -20,6 +20,10 @@ export default StyleSheet.create({
 
     newListButtonEnabled: {
         opacity: 1, 
+    },
+
+    newListButtonDisabled: {
+        opacity: 0.3, 
     }
 
 });
