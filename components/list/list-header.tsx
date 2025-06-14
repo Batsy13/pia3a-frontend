@@ -3,13 +3,10 @@ import { View, Text, TouchableOpacity } from "react-native";
 import styles from "@/styles/create-list/create-list-header";
 import { useRouter } from "expo-router";
 import { ArrowLeft } from "lucide-react-native";
-import { mockData } from "./list-items";
+import { List as ListType } from "@/types/lists";
 
-export default function ListHeader({ selectedListId }: { selectedListId: number }) {
+export default function ListHeader({ selectedList }: { selectedList: ListType }) {
   const router = useRouter();
-
-  const selectedList = mockData.lists.find((list) => list.id === selectedListId);
-  
 
   return (
     <View style={styles.container}>

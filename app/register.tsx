@@ -3,7 +3,7 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  StyleSheet,
+  ActivityIndicator,
 } from "react-native";
 import { Link } from "expo-router";
 import { useState } from "react";
@@ -21,7 +21,7 @@ export default function RegisterScreen() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const { errors, handleRegister, clearErrors } = useAuth();
+  const { errors, handleRegister, clearErrors, isLoading } = useAuth();
 
   const onSubmit = () => {
     const data: RegisterFormData = { name, email, password, confirmPassword };
@@ -41,7 +41,7 @@ export default function RegisterScreen() {
       <View style={styles.form}>
         <View style={{ display: "flex", flexDirection: "column", gap: 24 }}>
           <View style={styles.inputDiv}>
-            <Text style={{ color: "#BE1636", fontWeight: 600, fontSize: 24 }}>
+            <Text style={{ color: "#BE1636", fontWeight: "600", fontSize: 24 }}>
               Nome
             </Text>
             <TextInput
@@ -62,7 +62,7 @@ export default function RegisterScreen() {
             ) : null}
           </View>
           <View style={styles.inputDiv}>
-            <Text style={{ color: "#BE1636", fontWeight: 600, fontSize: 24 }}>
+            <Text style={{ color: "#BE1636", fontWeight: "600", fontSize: 24 }}>
               E-mail
             </Text>
             <TextInput
@@ -84,7 +84,7 @@ export default function RegisterScreen() {
             ) : null}
           </View>
           <View style={styles.inputDiv}>
-            <Text style={{ color: "#BE1636", fontWeight: 600, fontSize: 24 }}>
+            <Text style={{ color: "#BE1636", fontWeight: "600", fontSize: 24 }}>
               Senha
             </Text>
             <View style={styles.inputContainer}>
@@ -120,7 +120,7 @@ export default function RegisterScreen() {
             ) : null}
           </View>
           <View style={styles.inputDiv}>
-            <Text style={{ color: "#BE1636", fontWeight: 600, fontSize: 24 }}>
+            <Text style={{ color: "#BE1636", fontWeight: "600", fontSize: 24 }}>
               Confirmar Senha
             </Text>
             <View style={styles.inputContainer}>
@@ -156,34 +156,53 @@ export default function RegisterScreen() {
             ) : null}
           </View>
         </View>
-        <View style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+        <View
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: 24,
+            marginTop: 40,
+          }}
+        >
           <LinearGradient
             colors={["#BE1636", "#2B1838"]}
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 0 }}
             style={styles.button}
           >
-            <TouchableOpacity onPress={onSubmit}>
-              <Text
-                style={{
-                  color: "#FFF",
-                  fontWeight: 600,
-                  fontSize: 24,
-                  height: "auto",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                REGISTRAR
-              </Text>
+            <TouchableOpacity onPress={onSubmit} disabled={isLoading}>
+              {isLoading ? (
+                <ActivityIndicator color="#FFF" size="small" />
+              ) : (
+                <Text
+                  style={{
+                    color: "#FFF",
+                    fontWeight: "600",
+                    fontSize: 24,
+                    height: "auto",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  REGISTRAR
+                </Text>
+              )}
             </TouchableOpacity>
           </LinearGradient>
 
           <View style={styles.linkButton}>
-            <Text style={{ fontFamily: "Raleway", fontWeight: 600 }}>Já tem uma conta?</Text>
+            <Text style={{ fontFamily: "Raleway", fontWeight: "600" }}>
+              Já tem uma conta?
+            </Text>
             <Link href="/login" asChild>
-              <Text style={{ color: "#BE1636", fontFamily: "Raleway", fontWeight: 700}}>
+              <Text
+                style={{
+                  color: "#BE1636",
+                  fontFamily: "Raleway",
+                  fontWeight: "700",
+                }}
+              >
                 Entre
               </Text>
             </Link>
