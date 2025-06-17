@@ -53,7 +53,6 @@ export default function List() {
       </View>
     );
   }
-
   return (
     <View style={styles.container}>
       <>

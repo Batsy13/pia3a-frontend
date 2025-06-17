@@ -4,7 +4,6 @@ import { useNavigation, useLocalSearchParams } from "expo-router";
 import Toast from "react-native-toast-message";
 import { z } from 'zod';
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-
 import styles from "@/styles/create-list/create-list";
 import CreatePlaceHeader from "@/components/create-place/create-place-header";
 import CreatePlaceForm from "@/components/create-place/create-place-form";
@@ -45,6 +44,7 @@ export default function CreatePlace() {
     listName: "",
     description: "",
   });
+  
   const [validationErrors, setValidationErrors] = useState<ValidationErrors>({});
 
   const mutation = useMutation({

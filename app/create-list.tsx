@@ -4,7 +4,6 @@ import { useNavigation, router, RelativePathString } from "expo-router";
 import Toast from "react-native-toast-message";
 import { z } from "zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-
 import styles from "@/styles/create-list/create-list";
 import CreateListHeader from "@/components/create-list/create-list-header";
 import CreateListFooter from "@/components/create-list/create-list-footer";
