@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Image, TouchableOpacity, Text, Platform } from "react-native";
 import {
   GestureHandlerRootView,
@@ -7,17 +7,24 @@ import {
 import * as ImagePicker from "expo-image-picker";
 import styles from "@/styles/create-place/create-place-form";
 import { ImagePlus, Trash2 } from "lucide-react-native";
+import * as FileSystem from 'expo-file-system';
 
-export default function CreatePlaceForm({ onFormChange }: any) {
+interface FormData {
+  images: string[];
+  listName: string;
+  description: string;
+  addedAt: string;
+}
+
+export default function CreatePlaceForm({ onFormChange }: { onFormChange: (data: Partial<FormData>) => void }) {
   const [listName, setListName] = useState("");
   const [description, setDescription] = useState("");
   const [images, setImages] = useState<string[]>([]);
+  const [base64Images, setBase64Images] = useState<string[]>([]); 
 
-  const handleInputChange = (field: any, value: any) => {
-    if (field === "listName") setListName(value);
-    if (field === "description") setDescription(value);
-    onFormChange({ listName, description, images });
-  };
+  useEffect(() => {
+    onFormChange({ listName, description, images: base64Images });
+  }, [listName, description, base64Images, onFormChange]);
 
   const pickImage = async () => {
     if (Platform.OS !== 'web') {
@@ -29,24 +36,50 @@ export default function CreatePlaceForm({ onFormChange }: any) {
     }
 
     let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: [ 'images' ],
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
       aspect: [4, 3],
-      quality: 1,
+      quality: 0.7,
       allowsMultipleSelection: true,
+      base64: true,
     });
 
     if (!result.canceled) {
-      const newImages = result.assets.map((asset: { uri: any; }) => asset.uri);
-      setImages([...images, ...newImages]);
-      onFormChange({ listName, description, images: [...images, ...newImages] });
+      const newImageUris: string[] = [];
+      const newBase64Images: string[] = [];
+
+      for (const asset of result.assets) {
+        newImageUris.push(asset.uri);
+        if (asset.base64) {
+          newBase64Images.push(asset.base64);
+        } else {
+          try {
+            const base64 = await FileSystem.readAsStringAsync(asset.uri, {
+              encoding: FileSystem.EncodingType.Base64,
+            });
+            newBase64Images.push(base64);
+          } catch (e) {
+            console.error("Erro ao ler arquivo como Base64:", e);
+          }
+        }
+      }
+      
+      setImages(prev => [...prev, ...newImageUris]);
+      setBase64Images(prev => [...prev, ...newBase64Images]);
     }
   };
 
   const removeImage = (index: number) => {
-    const newImages = [...images];
-    newImages.splice(index, 1);
-    setImages(newImages);
-    onFormChange({ listName, description, images: newImages });
+    setImages(prev => {
+      const updated = [...prev];
+      updated.splice(index, 1);
+      return updated;
+    });
+
+    setBase64Images(prev => {
+      const updated = [...prev];
+      updated.splice(index, 1);
+      return updated;
+    });
   };
 
   return (
@@ -60,7 +93,7 @@ export default function CreatePlaceForm({ onFormChange }: any) {
             selectionColor="transparent"
             cursorColor="#BE1636"
             value={listName}
-            onChangeText={(text) => handleInputChange("listName", text)}
+            onChangeText={setListName}
           />
           <TextInput
             placeholder="Adicione uma descrição ao lugar"
@@ -69,7 +102,7 @@ export default function CreatePlaceForm({ onFormChange }: any) {
             selectionColor="transparent"
             cursorColor="#BE1636"
             value={description}
-            onChangeText={(text) => handleInputChange("description", text)}
+            onChangeText={setDescription}
           />
           
           <TouchableOpacity 

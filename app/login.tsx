@@ -1,4 +1,10 @@
-import { View, Text, TextInput, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  ActivityIndicator,
+} from "react-native";
 import { Link, router } from "expo-router";
 import { useState } from "react";
 import React from "react";
@@ -6,14 +12,14 @@ import { LinearGradient } from "expo-linear-gradient";
 import { Eye, EyeOff } from "lucide-react-native";
 import { useAuth } from "@/hooks/useAuth";
 import type { LoginFormData } from "@/types/auth";
-import styles from "@/styles/login-style"
+import styles from "@/styles/login-style";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const { errors, handleLogin, clearErrors } = useAuth();
-  
+  const { errors, handleLogin, clearErrors, isLoading } = useAuth();
+
   const onSubmit = () => {
     const data: LoginFormData = { email, password };
     handleLogin(data);
@@ -24,14 +30,15 @@ export default function Login() {
       colors={["#BE1636", "#2B1838"]}
       start={{ x: 0, y: 0 }}
       end={{ x: 1, y: 0 }}
-      style={styles.container}>
+      style={styles.container}
+    >
       <View style={styles.titleDiv}>
         <Text style={styles.title}>Olá {"\n"}Entre!</Text>
       </View>
       <View style={styles.form}>
-        <View style={{ display: 'flex', flexDirection: 'column', gap: 80 }}>
+        <View style={{ display: "flex", flexDirection: "column", gap: 80 }}>
           <View style={styles.inputDiv}>
-            <Text style={{ color: "#BE1636", fontWeight: 600, fontSize: 24 }}>
+            <Text style={{ color: "#BE1636", fontWeight: "600", fontSize: 24 }}>
               E-mail
             </Text>
             <TextInput
@@ -48,15 +55,20 @@ export default function Login() {
               selectionColor="transparent"
               cursorColor="#BE1636"
             />
-            {errors.email ? <Text style={styles.errorText}>{errors.email}</Text> : null}
+            {errors.email ? (
+              <Text style={styles.errorText}>{errors.email}</Text>
+            ) : null}
           </View>
           <View style={styles.inputDiv}>
-            <Text style={{ color: "#BE1636", fontWeight: 600, fontSize: 24 }}>
+            <Text style={{ color: "#BE1636", fontWeight: "600", fontSize: 24 }}>
               Senha
             </Text>
             <View style={styles.inputContainer}>
               <TextInput
-                style={[styles.input, errors.password ? styles.inputError : null]}
+                style={[
+                  styles.input,
+                  errors.password ? styles.inputError : null,
+                ]}
                 placeholderTextColor={"#8D8C9A"}
                 placeholder="exemplo123"
                 value={password}
@@ -80,25 +92,44 @@ export default function Login() {
                 )}
               </TouchableOpacity>
             </View>
-            {errors.password ? <Text style={styles.errorText}>{errors.password}</Text> : null}
+            {errors.password ? (
+              <Text style={styles.errorText}>{errors.password}</Text>
+            ) : null}
           </View>
         </View>
-        <View style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+        <View
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: 24,
+            marginTop: 40,
+          }}
+        >
           <LinearGradient
             colors={["#BE1636", "#2B1838"]}
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 0 }}
-            style={styles.button}>
-            <TouchableOpacity onPress={onSubmit}>
-              <Text style={styles.buttonText}>ENTRAR</Text>
+            style={styles.button}
+          >
+            <TouchableOpacity onPress={onSubmit} disabled={isLoading}>
+              {isLoading ? (
+                <ActivityIndicator color="#FFF" size="small" />
+              ) : (
+                <Text style={styles.buttonText}>ENTRAR</Text>
+              )}
             </TouchableOpacity>
           </LinearGradient>
 
           <View style={styles.linkButton}>
-            <Text style={{ fontFamily: 'Raleway' }}>Não tem uma conta?
-            </Text>
+            <Text style={{ fontFamily: "Raleway" }}>Não tem uma conta?</Text>
             <Link href="/register" asChild>
-              <Text style={{ color: '#BE1636', fontFamily: 'Raleway', fontWeight: 800}}>
+              <Text
+                style={{
+                  color: "#BE1636",
+                  fontFamily: "Raleway",
+                  fontWeight: "800",
+                }}
+              >
                 Registre-se
               </Text>
             </Link>

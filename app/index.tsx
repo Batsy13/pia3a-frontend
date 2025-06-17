@@ -1,11 +1,43 @@
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, ActivityIndicator } from 'react-native';
 import { useRouter } from 'expo-router';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Home() {
-
   const router = useRouter();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const checkLoginStatus = async () => {
+      try {
+        const userToken = await AsyncStorage.getItem('userToken');
+        if (userToken) {
+          router.replace('/(tabs)/home'); 
+        } else {
+          setLoading(false);
+        }
+      } catch (error) {
+        console.error('Erro ao checar login:', error);
+        setLoading(false);
+      }
+    };
+
+    checkLoginStatus();
+  }, []);
+
+  if (loading) {
+    return (
+      <LinearGradient
+        colors={['#BE1636', '#2B1838']}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 0 }}
+        style={styles.container}
+      >
+        <ActivityIndicator size="large" color="#FFF" />
+      </LinearGradient>
+    );
+  }
 
   return (
     <LinearGradient
@@ -40,7 +72,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 32,
-
   },
   title: {
     fontSize: 48,
